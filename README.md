@@ -1,5 +1,9 @@
 # skills
 
+## 自作スキル
+
+- **doh**: DoH クエリの構築とデバッグ (RFC 8484 / kdig / curl / Workers のキャッシュ・エラー切り分け) を毎回調べ直さず済ませるため。
+
 ## 取得スキル (.gitignore で除外)
 
 - **cloudflare** / **cloudflare-one**: 公式ドキュメントはかねてからhumanよりmachine readableなので
