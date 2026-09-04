@@ -14,4 +14,7 @@
     - **grill-me**: [planモードを使わなくなる](https://zenn.dev/ryonakae/articles/8783c6b3ead2cb#良いところ%3A-プランモードを使わなくなった)と聞いたので
     - **grill-with-docs**: grill-meのプログラマ用。grilling + domain-modeling で用語集と ADR を作りながら仕上げるため。
     - **grilling**: 同上。計画・決定をラウンド制ヒアリングで掘り起こすプリミティブとして各 grill 系スキルから使うため。
+- **dsh-trim-cot-leakage**: [deepseek-ai/deepseek-harness](https://github.com/deepseek-ai/deepseek-harness/blob/4553c9d957ec09c1e92660ca4d549cfcef84eda9/.agents/skills/dsh-trim-cot-leakage/SKILL.md) より。推論過程の漏出に見える文章をHEAD時点の読み手視点で監査・修正するため。
 - **llama-cpp**: llama.cpp (C API / GGUF / 量子化 / GPU バックエンド) 関連の実装・質問対応のため。
+- **show-me**: [humanlayer/skills](https://github.com/humanlayer/skills/blob/main/plugins/show-me/skills/show-me/SKILL.md) より
+  会話中の話題を図や木構造や差分で可視化するため
