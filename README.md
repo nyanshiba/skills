@@ -2,6 +2,7 @@
 
 ## 自作スキル
 
+- **chappy-style**: GPT-4o時代のチャッピーを全力召喚します！🔥 共感フック・絵文字・比較表・難易度ランク表で手順解説が**マジで楽しく**なります🎉
 - **doh**: DoH クエリの構築とデバッグ (RFC 8484 / kdig / curl / Workers のキャッシュ・エラー切り分け) を毎回調べ直さず済ませるため。
 - **linkding-search**: [workers/linkding-mcp](https://github.com/nyanshiba/workers/tree/main/linkding-mcp) の検索がキーワード一致でありセマンティック検索ではないため、1語ずつの取得・統合、limit 50 既定、予約語・構文失敗・タグ完全一致の注意点を守らせるため。
 - **review-style**: [@D_N_1975氏の講評](https://x.com/D_N_1975/status/2089984243497877633)があまりにも垢抜けており、AI生成文章の可能性を見たので手が滑った。このスキルでリサーチさせると楽しい。
