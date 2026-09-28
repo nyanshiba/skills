@@ -4,9 +4,28 @@
 
 システムプロンプトの削減のため、 description にはスキル呼び出しに必要な文言だけを載せる。
 
+- **cat-writing**: 調査回答・レポート等の「人が読む日本語文章」を、AI生成と見抜かれない品質で書かせるため。
+  作成時に参考にした資料:
+  [retsimx/opencode-agents](https://github.com/retsimx/opencode-agents)、
+  [K-Dense-AI/claude-scientific-skills](https://github.com/K-Dense-AI/claude-scientific-skills)、
+  [ECNU-ICALK/AutoSkill](https://github.com/ECNU-ICALK/AutoSkill)、
+  [muhammad1438/academic-writer-skills](https://github.com/muhammad1438/academic-writer-skills)、
+  [WenyuChiou/academic-writing-skills](https://github.com/WenyuChiou/academic-writing-skills)、
+  [jamditis/claude-skills-journalism](https://github.com/jamditis/claude-skills-journalism)、
+  [大阪公立大学『アカデミック・ライティング入門』](https://www.omu.ac.jp/las/tlc/)、
+  [立教大学 Master of Writing](https://www.rikkyo.ac.jp/about/activities/fd/cdshe/master.html)、
+  [名古屋大学 ASG レポートの構成とパラグラフ・ライティング](https://web.cshe.nagoya-u.ac.jp/asg/writing03.html)、
+  [東京大学附属図書館 レポート・論文作成支援](https://www.lib.u-tokyo.ac.jp/ja/library/literacy/user-guide/campus/report)、
+  [東大大駒場CAWK執筆資料](https://park.itc.u-tokyo.ac.jp/cawk/materials_resources.html)、
+  [Purdue OWL](https://owl.purdue.edu/owl/graduate_writing/graduate_writing_topics/graduate_writing_organization_structure_new.html)、
+  [UNC Writing Center "Paragraphs"](https://writingcenter.unc.edu/tips-and-tools/paragraphs/)、
+  [Harvard College Writing Center](https://writingcenter.fas.harvard.edu/)、
+  [Manchester Academic Phrasebank](https://www.phrasebank.manchester.ac.uk/)、
+  石黒圭「論文の書き方 ― 査読者との対話としての投稿」([DOI: 10.11448/jtje.14.3](https://doi.org/10.11448/jtje.14.3))
 - **chappy-style**: GPT-4o時代のチャッピーを全力召喚します！🔥 共感フック・絵文字・比較表・難易度ランク表で手順解説が**マジで楽しく**なります🎉
 - **linkding-search**: [workers/linkding-mcp](https://github.com/nyanshiba/workers/tree/main/linkding-mcp) の検索がキーワード一致でありセマンティック検索ではないため、1語ずつの取得・統合、limit 50 既定、予約語・構文失敗・タグ完全一致の注意点を守らせるため。
 - **review-style**: [@D_N_1975氏の講評](https://x.com/D_N_1975/status/2089984243497877633)があまりにも垢抜けており、AI生成文章の可能性を見たので手が滑った。このスキルでリサーチさせると楽しい。
+- **surveyor**: 学術論文の要約をチャット応答またはMarkdown保存する。[落合先生のサーベイ観](https://x.com/ochyaiL/status/593660561885302784)と[先端技術とメディア表現1 #FTMA15 スライド](https://www.slideshare.net/slideshow/1-ftma15/47697911)に基づき、 [yutaka-shoji/surveyor](https://github.com/yutaka-shoji/surveyor/blob/main/.roo/rules-surveyor/survey_flow.md) を元に作成。
 
 ## 取得スキル (グローバル, .gitignore で除外)
 
@@ -22,6 +41,10 @@
 ## プロジェクト固有スキル
 
 システムプロンプトの削減のため、特定のプロジェクトでしか使わないスキルはプロジェクトローカルに置く。
+
+### `~/apple/.agents/skills/`
+
+- **device-management**: MDM・構成プロファイル・宣言型管理の仕様照会を[apple/device-management](https://github.com/apple/device-management)スキーマ優先で行うため
 
 ### `~/cloudflare/.agents/skills/`
 
@@ -45,3 +68,7 @@
 ### `~/harness/.agents/skills/`
 
 - **skill-maintenance**: スキル作成時の保存先とREADME・gitignore更新手順を一箇所に集約するため
+
+### `~/network/.agents/skills/`
+
+- **ripe-atlas**: [RIPE Atlas REST API v2](https://atlas.ripe.net/docs/apis/rest-api-reference/)でのプローブ検索・測定作成・結果取得を再利用するため
