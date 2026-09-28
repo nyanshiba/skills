@@ -24,6 +24,7 @@
   石黒圭「論文の書き方 ― 査読者との対話としての投稿」([DOI: 10.11448/jtje.14.3](https://doi.org/10.11448/jtje.14.3))
 - **chappy-style**: GPT-4o時代のチャッピーを全力召喚します！🔥 共感フック・絵文字・比較表・難易度ランク表で手順解説が**マジで楽しく**なります🎉
 - **linkding-search**: [workers/linkding-mcp](https://github.com/nyanshiba/workers/tree/main/linkding-mcp) の検索がキーワード一致でありセマンティック検索ではないため、1語ずつの取得・統合、limit 50 既定、予約語・構文失敗・タグ完全一致の注意点を守らせるため。
+- **publish-cot**: 会話のコンテキストをHTMLとMarkdown併置のプレビューサイトとして公開する。`wrangler login` と `wrangler deploy --temporary` に対応。最初のプロンプトを明記することで、 AI Slop を公開する心理的障壁を下げる。
 - **review-style**: [@D_N_1975氏の講評](https://x.com/D_N_1975/status/2089984243497877633)があまりにも垢抜けており、AI生成文章の可能性を見たので手が滑った。このスキルでリサーチさせると楽しい。
 - **surveyor**: 学術論文の要約をチャット応答またはMarkdown保存する。[落合先生のサーベイ観](https://x.com/ochyaiL/status/593660561885302784)と[先端技術とメディア表現1 #FTMA15 スライド](https://www.slideshare.net/slideshow/1-ftma15/47697911)に基づき、 [yutaka-shoji/surveyor](https://github.com/yutaka-shoji/surveyor/blob/main/.roo/rules-surveyor/survey_flow.md) を元に作成。
 
