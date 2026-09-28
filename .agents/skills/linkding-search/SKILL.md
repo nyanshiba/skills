@@ -1,6 +1,6 @@
 ---
 name: linkding ブックマーク検索の使い方
-description: linkding のブックマーク検索 (linkding-mcp の search ツール) を使うときに使用する。キーワード・タグの完全一致検索でありセマンティック検索ではないため、日本語と英単語の両方での検索、1語ずつの取得と統合、limit/offset ページング、タグ完全一致、予約語、0件の原因切り分けについて相談されたときに使用する。
+description: linkding のブックマーク検索 (linkding-mcp の search ツール) を使うときに使用する。
 ---
 
 # linkding ブックマーク検索の使い方
@@ -74,3 +74,21 @@ linkding 検索に意味的類似度は無い。
 - ヒット理由が `title`・`description` に見えない場合、URL・メモ由来の可能性がある (メモ本文は返却されない)
 - `description` が空の件がある
 - `date_added` で新旧を判断する
+
+## 応答の JSON フォーマット
+
+成功時は text ブロック内に次の形の JSON 文字列が入る
+`{"count": 総件数, "results": [...]}`
+各件は `url` / `title` / `description` / `tags` / `date_added` を持つ
+失敗時は `isError: true` が付き、本文に原因が出る
+`linkding API error: ...` は linkding 側の HTTP エラーである
+`linkding request failed: ...` は通信・設定異常である
+`isError` の場合は同条件で再試行せず、本文の原因を読む
+
+## 権限エラー
+
+結果が `Permission.Declined` 系エラー (`ERR Error: Permission.DeclinedError` 等) の場合
+検索の失敗ではなく実行権限の拒否である
+同条件で再試行しても成功しない
+対話セッションでは利用者に承認を求める
+非対話実行 (`run` 等) では権限要求が自動拒否されるため `--auto` を付ける

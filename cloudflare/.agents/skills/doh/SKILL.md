@@ -1,6 +1,6 @@
 ---
 name: DoH クエリの書き方・デバッグ方法
-description: DNS over HTTPS (DoH) のクエリ構築(RFC 8484 / RFC 1035 の wire format / base64url)と、kdig・curl でのデバッグ、Workers 経由でのキャッシュ(cf-cache-status)や 403/エラー原因の切り分けについて相談されたときに使用する。
+description: DNS over HTTPS (DoH) のクエリ構築やデバッグについて相談されたときに使用する。
 ---
 
 # DoH クエリの書き方・デバッグ方法
@@ -68,6 +68,56 @@ GET に `--data-binary @-` でボディを渡すと **origin が invalid request
 ### kdig
 - `kdig @<host> -p 443 +https +tls-hostname=<host> <name> A` など。DoH 専用は `+https`(HTTPS 互換)。
 - `+dohurl=` オプションは**非対応**なバージョンがあるので、無理に使わず curl で代替する。
+
+### kdig の証明書検証(デフォルトは検証しない)
+kdig の TLS 検証は **opt-in** であり、`+tls` / `+https` だけでは RFC 7858 §4.1 の「Opportunistic privacy profile」、つまり**証明書を検証しない**。
+
+| 目的 | オプション |
+|---|---|
+| **検証を有効化**(既定の CA ストア) | `+tls-ca`(引数なしでシステム CA を使用) |
+| 検証を有効化(CA を指定) | `+tls-ca=/path/to/ca.pem`(複数回指定可) |
+| 検証を無効化 | `+no-tls-ca`(または付けない) |
+| 検証対象ホスト名を指定 | `+tls-hostname=<STR>`(未指定なら対象サーバ名で厳密認証) |
+| SNI のみ設定(検証と独立) | `+tls-sni=<STR>` |
+| SPKI ピン留め(RFC 7858 §4.2) | `+tls-pin=<base64 of SHA-256 SPKI>`(複数回指定可) |
+
+例:
+```
+# システム CA で検証しつつ DoH
+kdig @8.8.8.8 +https +tls-ca +tls-hostname=dns.google example.com A
+
+# ピン留めで検証
+kdig -d @185.49.141.38 +tls-ca +tls-host=getdnsapi.net \
+     +tls-pin=foxZRnIh9gZpWnl+zEiKa0EJ2rdCGroMWm02gaxSc9S= soa example.com.
+```
+出典: kdig(1) man page(Knot DNS 各バージョン共通)。
+
+### 証明書そのものの診断は openssl で
+kdig の `+tls-ca` は合否のみを返し、失敗理由(チェーン欠落・期限切れ・SAN 不一致)は語らない。
+原因の診断は `openssl s_client` で証明書を直接見る。
+
+```bash
+# 概要(subject / issuer / 有効期限 / SAN)
+openssl s_client -connect doh.example.com:443 -servername doh.example.com </dev/null 2>/dev/null \
+  | openssl x509 -noout -subject -issuer -dates -ext subjectAltName
+
+# チェーン検証結果(0 (ok) = システム CA で通過)
+openssl s_client -connect doh.example.com:443 -servername doh.example.com </dev/null 2>&1 \
+  | grep -E "^depth|verify|Verify return"
+
+# 中間証明書を含む全チェーン
+openssl s_client -connect doh.example.com:443 -servername doh.example.com -showcerts </dev/null
+
+# 期限早期警告(24時間以内に切れると非ゼロ終了)
+echo | openssl s_client -connect doh.example.com:443 -servername doh.example.com 2>/dev/null \
+  | openssl x509 -checkend 86400 -noout
+```
+
+private origin を Worker 結線前に単独検証するには、IP 宛て + SNI 指定を使う(curl の `--resolve` 相当):
+```bash
+openssl s_client -connect 10.0.10.53:443 -servername doh.example.com </dev/null 2>&1 | grep "Verify return"
+```
+これで `Verify return code: 0 (ok)` を確認できれば、Workers fetch の 500 は証明書以外の要因に絞れる。
 
 ## 403 の切り分け
 
