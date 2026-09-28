@@ -25,17 +25,23 @@
 
 ### `~/cloudflare/.agents/skills/`
 
-- **doh** (`~/cloudflare/.agents/skills/doh/`)
-  DoHクエリの構築とデバッグ手順を再利用するため
-- **cloudflare** / **cloudflare-one** (`~/cloudflare/.agents/skills/cloudflare/`)
-  公式ドキュメントはかねてからhumanよりmachine readableなので
+- **doh**: DoHクエリの構築とデバッグ手順を再利用するため
+- **agents-sdk** / **cloudflare** / **cloudflare-one** / **wrangler**: [cloudflare/skills](https://github.com/cloudflare/skills/tree/main/skills)より。公式ドキュメントはかねてから human より machine readable なので
+- **modern-web-guidance**: [googlechrome/modern-web-guidance](https://github.com/googlechrome/modern-web-guidance) より。 AS13335 に全て賭けているのでここに。
+
+### `~/grafana/.agents/skills/`
+
+- **dashboarding**: [grafana/skills/grafana-core](https://github.com/grafana/skills/tree/main/skills/grafana-core/) より。ダッシュボードJSONの作成とパネル配置と変数設定のため
+- **grafana-oss**: Grafana本体とdatasourceのprovisioning設定のため
+- **promql**: PromQLの作成と検証と最適化のため
+- **loki**: [grafana/skills/grafana-lgtm](https://github.com/grafana/skills/tree/main/skills/grafana-lgtm) より。LogQL記述とLokiの収集設定のため
+- **prometheus**: PromQL記述とalertingとrecording rulesのため
+- **victoriametrics-query**: [VictoriaMetrics/skills](https://github.com/VictoriaMetrics/skills/tree/main/plugins/query/skills/victoriametrics-query) より。PromQLとMetricsQLの実行とメトリクス調査のため
 
 ### `~/llama/.agents/skills/`
 
-- **llama-cpp** (`~/llama/.agents/skills/llama-cpp/`)
-  llama.cpp関連の実装・質問対応のため
+- **llama-cpp**: [claude-skills/llama-cpp](https://github.com/maystudios/claude-skills/tree/main/llama-cpp) より。llama.cpp関連の実装・質問対応のため
 
 ### `~/harness/.agents/skills/`
 
-- **skill-maintenance** (`~/harness/.agents/skills/skill-maintenance/`)
-  スキル作成時の保存先とREADME・gitignore更新手順を一箇所に集約するため
+- **skill-maintenance**: スキル作成時の保存先とREADME・gitignore更新手順を一箇所に集約するため
