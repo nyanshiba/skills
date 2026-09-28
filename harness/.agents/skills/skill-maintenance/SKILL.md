@@ -1,6 +1,6 @@
 ---
 name: skill-maintenance
-description: 新規スキルの作成・追加・編集で使用する／SKILL.md保存先の決定とREADME・gitignore更新が必要な場合に読み込む
+description: 新規スキルの作成・追加・編集をするときに使用する。
 ---
 
 # スキルメンテナンス
@@ -13,18 +13,21 @@ descriptionによる自動想起で運用する
 
 ## 保存先
 
-スキル本体は常に次のパスに保存する
+複数プロジェクトで使うスキルは次のパスに保存する
 `~/.agents/skills/<id>/SKILL.md`
+単一プロジェクト専用のスキルはそのプロジェクト直下に保存する
+`~/<project>/.agents/skills/<id>/SKILL.md`
 `<id>` はケバブケースで付ける
 既存スキルと重複しないIDを選ぶ
 
 ## 作成手順
 
 作業は次の順序で進める
-1 SKILL.md本体を作成する
-2 README.mdに一行意図を追記する
-3 取得スキルに該当する場合のみ .gitignoreを更新する
-4 保存結果を読み直して検証する
+1 配置先を決める (グローバルかプロジェクト固有か)
+2 SKILL.md本体を配置先に作成する
+3 グローバルREADME.mdに一行意図を追記する
+4 取得スキルに該当する場合のみ配置先の.gitignoreを更新する
+5 保存結果を読み直して検証する
 
 ## SKILL.mdの書式
 
@@ -37,8 +40,9 @@ descriptionによる自動想起で運用する
 ## README.mdの更新
 
 対象は `~/.agents/skills/README.md` とする
-自作スキルは `## 自作スキル` に追記する
-取得スキルは `## 取得スキル (.gitignore で除外)` に追記する
+グローバル配置は自作・取得の節に追記する
+プロジェクト配置は `~/<project>/.agents/skills/` の節に追記する
+表記は絶対パスとし相対パスにしない
 一行で作成意図が伝わる説明を書く
 並びはアルファベット順に合わせる
 取得スキルには出所URLを添える
@@ -46,7 +50,7 @@ descriptionによる自動想起で運用する
 
 ## .gitignoreの更新
 
-対象は `~/.agents/skills/.gitignore` とする
+対象は各配置先の `.agents/skills/.gitignore` とする
 インターネットから取得したスキルのみ列挙する
 自作スキルは列挙対象から外す
 形式は `/<id>/` の一行形式とする
@@ -58,6 +62,16 @@ descriptionによる自動想起で運用する
 自前で文章化したものは自作として扱う
 取得はREADMEに出所URLを添えてgitignoreにも加える
 自作はREADMEのみに加えてgitignoreには加えない
+
+## READMEのskill認識抑止
+
+ソース直下のMarkdownはskillとして検出される
+README.mdも例外ではなくID `README` で登録される
+descriptionがなくても一覧には載るため抑止が必要になる
+抑止は `opencode.json` の権限で一括して行う
+`{ "action": "skill", "resource": "README", "effect": "deny" }`
+この一行で全ソースのREADMEが検出対象から外れる
+新規プロジェクトにskills置き場を作っても追加設定は要らない
 
 ## 検証
 

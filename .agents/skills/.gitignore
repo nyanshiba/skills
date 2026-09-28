@@ -1,11 +1,8 @@
 # インターネットから取得したスキル(自作ではないため非公開)
-/cloudflare/
-/cloudflare-one/
-/cognitive-rhythm-writing/
-/llama-cpp/
 /grilling/
-/grill-me/
 /grill-with-docs/
 /domain-modeling/
 /dsh-trim-cot-leakage/
 /show-me/
+
+README.md
