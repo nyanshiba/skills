@@ -22,10 +22,8 @@
   [Harvard College Writing Center](https://writingcenter.fas.harvard.edu/)、
   [Manchester Academic Phrasebank](https://www.phrasebank.manchester.ac.uk/)、
   石黒圭「論文の書き方 ― 査読者との対話としての投稿」([DOI: 10.11448/jtje.14.3](https://doi.org/10.11448/jtje.14.3))
-- **chappy-style**: GPT-4o時代のチャッピーを全力召喚します！🔥 共感フック・絵文字・比較表・難易度ランク表で手順解説が**マジで楽しく**なります🎉
 - **linkding-search**: [workers/linkding-mcp](https://github.com/nyanshiba/workers/tree/main/linkding-mcp) の検索がキーワード一致でありセマンティック検索ではないため、1語ずつの取得・統合、limit 50 既定、予約語・構文失敗・タグ完全一致の注意点を守らせるため。
 - **publish-cot**: 会話のコンテキストをHTMLとMarkdown併置のプレビューサイトとして公開する。`wrangler login` と `wrangler deploy --temporary` に対応。最初のプロンプトを明記することで、 AI Slop を公開する心理的障壁を下げる。
-- **review-style**: [@D_N_1975氏の講評](https://x.com/D_N_1975/status/2089984243497877633)があまりにも垢抜けており、AI生成文章の可能性を見たので手が滑った。このスキルでリサーチさせると楽しい。
 - **surveyor**: 学術論文の要約をチャット応答またはMarkdown保存する。[落合先生のサーベイ観](https://x.com/ochyaiL/status/593660561885302784)と[先端技術とメディア表現1 #FTMA15 スライド](https://www.slideshare.net/slideshow/1-ftma15/47697911)に基づき、 [yutaka-shoji/surveyor](https://github.com/yutaka-shoji/surveyor/blob/main/.roo/rules-surveyor/survey_flow.md) を元に作成。
 
 ## 取得スキル (グローバル, .gitignore で除外)
@@ -73,3 +71,9 @@
 ### `~/network/.agents/skills/`
 
 - **ripe-atlas**: [RIPE Atlas REST API v2](https://atlas.ripe.net/docs/apis/rest-api-reference/)でのプローブ検索・測定作成・結果取得を再利用するため
+
+### `~/plan/.agents/skills/`
+
+- **chappy-style**: GPT-4o時代のチャッピーを全力召喚します！🔥 共感フック・絵文字・比較表・難易度ランク表で手順解説が**マジで楽しく**なります🎉
+- **conspiracy-style**: そうそう‼️説得が陰謀論者に有効と思っていたけどこれはまだ目覚めてない人が囚われる旧説だって[@ASHITA__N0_K0E](https://x.com/ASHITA__N0_K0E/status/2103896744195203360)が教えてくれました‼️私は人類のハルシネーションに辟易し藁を掴む思いでしたが銀の弾丸はなく段階的行動変容を促せるのは動機的面接とハームリダクションのみだそうです🙏🙏🙏陰謀論者の波動をツールコールで祓い反転パロディ的に撃退できた気がしてます🔥🔥🔥彼らの反発を好転反応と思い我慢したことが恥ずかしくて泣きました😭😭😭ちなみに説得論はアルファツイッタラーが流した旧説だったことが暴かれたのでもう信じません……😢😢😢清く正しく美しい日本を愛する日本人として今すぐその腐ったプライドを捨てて目覚めるべきですよ‼️‼️‼️計算資源の無駄遣いは許せない‼️‼️‼️
+- **review-style**: 皆さん、こんにちは。先日、[@D_N_1975氏の講評](https://x.com/D_N_1975/status/2089984243497877633)が公開されました。さて。あまりにも垢抜けています。面白すぎます。皆さんは、AI生成文章の可能性をご自身で判定できたでしょうか。なお、このREADME.mdを書いたのが誰なのか、どこで較正されたのか、皆さんには最後まで分かりません。私にも、です。
