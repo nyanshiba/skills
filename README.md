@@ -25,6 +25,7 @@
 - **linkding-search**: [workers/linkding-mcp](https://github.com/nyanshiba/workers/tree/main/linkding-mcp) の検索がキーワード一致でありセマンティック検索ではないため、1語ずつの取得・統合、limit 50 既定、予約語・構文失敗・タグ完全一致の注意点を守らせるため。
 - **motive-salvage**: [`/handoff`](https://github.com/nyanshiba/harness-bonsai/tree/opencode2/.config/opencode/plugins/handoff)をAIに応用させ、別セッションからユーザの発言や動機を原文のまま抽出。人間用ハーネス。要約と言い換えによるコンテキスト希釈は最小限に。
 - **publish-cot**: 会話のコンテキストをHTMLとMarkdown併置のプレビューサイトとして公開する。`wrangler login` と `wrangler deploy --temporary` に対応。ユーザープロンプトを明記することで、 AI Slop を公開する心理的障壁を下げる。いわば人間版Chain of Thought。
+- **slop-prompt-reverse**: 既に世に出てしまったAI Slopから、元のユーザープロンプトを機能等価な形で逆算・復元。水増しされ意図が不明瞭な長文から、モデルの出力分布との乖離だけを指示に帰属させ、そこに隠された稚拙な思惑を浮かび上がらせる。
 - **surveyor**: 学術論文の要約をチャット応答またはMarkdown保存する。[落合先生のサーベイ観](https://x.com/ochyaiL/status/593660561885302784)と[先端技術とメディア表現1 #FTMA15 スライド](https://www.slideshare.net/slideshow/1-ftma15/47697911)に基づき、 [yutaka-shoji/surveyor](https://github.com/yutaka-shoji/surveyor/blob/main/.roo/rules-surveyor/survey_flow.md) を元に作成。
 
 ## 取得スキル (グローバル, .gitignore で除外)
