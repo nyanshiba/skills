@@ -140,8 +140,12 @@ function mdToHtml(md) {
         codeBuf = [];
       } else {
         inCode = false;
-        const cls = codeLang ? ` class="language-${codeLang}"` : "";
-        html.push(`<pre><code${cls}>${escapeHtml(codeBuf.join("\n"))}</code></pre>`);
+        if (codeLang === "mermaid") {
+          html.push(`<pre class="mermaid">${escapeHtml(codeBuf.join("\n"))}</pre>`);
+        } else {
+          const cls = codeLang ? ` class="language-${codeLang}"` : "";
+          html.push(`<pre><code${cls}>${escapeHtml(codeBuf.join("\n"))}</code></pre>`);
+        }
       }
       i++;
       continue;
@@ -245,12 +249,14 @@ function renderPage(md) {
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light dark">
 <title>${escapeHtml(title)}</title>
-<style>:root{color-scheme:light dark}html{-webkit-text-size-adjust:100%;text-size-adjust:100%}body{max-width:48rem;margin:2rem auto;padding:0 1rem;font-family:-apple-system,BlinkMacSystemFont,"Verdana Pro","Segoe UI","BIZ UDPGothic","Noto Sans CJK JP",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Noto Sans Emoji";line-height:1.7;line-break:strict;overflow-wrap:break-word;color:#100F0F;background:#FFFCF0}p{margin:0 0 1.6em}blockquote{margin:1.5em 0;padding:.25em 0 .25em 1em;border-left:3px solid #878580}blockquote.prompt{max-width:80%;margin:1.5em 0 1.5em auto;padding:.75em 1em;border:0;border-radius:1em;background:#1A4F8C;color:#FFFCF0}blockquote.prompt a{color:#FFFCF0}blockquote.prompt code{background:rgba(255,252,240,.22);color:inherit}pre{background:#F2F0E5;padding:1rem;overflow:auto}code{background:#F2F0E5;padding:.1em .3em}pre code{background:none;padding:0}pre,code{font-family:"Intel One Mono",ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace}table{border-collapse:collapse}th,td{border:1px solid #878580;padding:.25rem .5rem}a{color:#1A4F8C}a:focus-visible{outline:3px solid #1A4F8C;outline-offset:2px}hr{border-color:#DAD8CE}@media (prefers-color-scheme:dark){body{color:#CECDC3;background:#100F0F}pre,code{background:#1C1B1A}th,td{border-color:#878580}a{color:#92BFDB}a:focus-visible{outline-color:#92BFDB}blockquote.prompt{background:#92BFDB;color:#100F0F}blockquote.prompt a{color:#100F0F}blockquote.prompt code{background:rgba(16,15,15,.14)}hr{border-color:#343331}}</style>
+<style>:root{color-scheme:light dark}html{-webkit-text-size-adjust:100%;text-size-adjust:100%}body{max-width:48rem;margin:2rem auto;padding:0 1rem;font-family:-apple-system,BlinkMacSystemFont,"Verdana Pro","Segoe UI","BIZ UDPGothic","Noto Sans CJK JP",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Noto Sans Emoji";line-height:1.7;line-break:strict;overflow-wrap:break-word;color:#100F0F;background:#FFFCF0}p{margin:0 0 1.6em}blockquote{margin:1.5em 0;padding:.25em 0 .25em 1em;border-left:3px solid #878580}blockquote.prompt{box-sizing:border-box;width:fit-content;max-width:80%;margin:1.5em 0 1.5em auto;padding:.75em 1em;border:0;border-radius:1em;background:#1A4F8C;color:#FFFCF0}blockquote.prompt a{color:#FFFCF0}blockquote.prompt code{background:rgba(255,252,240,.22);color:inherit}pre{background:#F2F0E5;padding:1rem;overflow:auto}code{background:#F2F0E5;padding:.1em .3em}pre code{background:none;padding:0}pre,code{font-family:"Intel One Mono",ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace}table{border-collapse:collapse}th,td{border:1px solid #878580;padding:.25rem .5rem}a{color:#1A4F8C}a:focus-visible{outline:3px solid #1A4F8C;outline-offset:2px}hr{border-color:#DAD8CE}@media (prefers-color-scheme:dark){body{color:#CECDC3;background:#100F0F}pre,code{background:#1C1B1A}th,td{border-color:#878580}a{color:#92BFDB}a:focus-visible{outline-color:#92BFDB}blockquote.prompt{background:#92BFDB;color:#100F0F}blockquote.prompt a{color:#100F0F}blockquote.prompt code{background:rgba(16,15,15,.14)}hr{border-color:#343331}}</style>
 </head>
 <body>
 <main>
 ${mdToHtml(md)}
 </main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.15.0/mermaid.min.js" integrity="sha512-HH52omhHpZF6RfVnGiQwYgYm4H/ya2xsZYLl5xJ4+tLfX+rN4+8zF7V/H/KLeicPrKZYi1g6iBmVkk2AhXTGlg==" crossorigin="anonymous" defer></script>
+<script>window.addEventListener("DOMContentLoaded",()=>{if(window.mermaid&&document.querySelector("pre.mermaid")){window.mermaid.initialize({startOnLoad:true,theme:window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"default"});}});</script>
 </body>
 </html>`;
 }
@@ -285,7 +291,7 @@ ${mdToHtml(md)}
 最初のユーザープロンプトを `>` の引用で一言一句そのまま置くこと
 ユーザープロンプトの引用はプロンプト吹き出しと呼び通常の引用と区別すること
 2回目以降は文脈に欠かせない場合かユーザーの指示がある場合のみ使うこと
-使う場合は先頭行を `> [!prompt]` にし本文を続けること
+使う場合はマーカー `> [!prompt]` を引用の最初の行に単独で置き、本文は2行目以降に `> ` で続けること (マーカーと本文を同一行に書くと変換器が認識せず通常の引用になる)
 通常の引用は素の `>` のままにすること
 要約や言い換えに引用書式を使うな
 原文が取得できる場合にのみ引用すること
@@ -293,7 +299,15 @@ ${mdToHtml(md)}
 その後に `# タイトル` を置くこと
 この行がHTMLのタイトルになる
 見出しと箇条書きと引用と表とコード fence を使うこと
-外部依存は持ち込まず素のMarkdownだけにすること
+図が必要な場合のみ言語名 `mermaid` のコード fence を使うこと
+`mermaid` fence はWorkerが `<pre class="mermaid">` に変え
+cdnjs配布の `mermaid.min.js` が図化すること
+バージョンは `11.15.0` に固定し変更しないこと
+`mermaid` の構文は公式ドキュメント https://mermaid.js.org/ に従うこと
+図種ごとの書式は https://mermaid.js.org/syntax/flowchart.html からたどること
+ラベルに `/` や空白を含む場合は `"` で囲むこと
+特殊ノードの開閉記号は対応させること
+外部依存はこの1本を除き持ち込まず素のMarkdownだけにすること
 
 ```md
 > {最初のユーザープロンプト}
